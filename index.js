@@ -1,9 +1,15 @@
 import express from "express";
-import dotenv from 'dotenv';
-
-
+import router from "./routes/openaiRoutes.js";
+import dotenv from "dotenv";
 dotenv.config();
-const port = process.env.PORT;
+
+const port = process.env.PORT || 5000;
 
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/api", router);
+
 app.listen(port, () => console.log(`Server started on port ${port}`));
